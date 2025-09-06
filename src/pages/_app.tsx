@@ -5,12 +5,7 @@ import { ThemeProvider } from "next-themes"
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<ClerkProvider
-			{...pageProps}
-			appearance={{
-				cssLayerName: "clerk",
-			}}
-		>
+		<ClerkProvider>
 			<ThemeProvider attribute="class">
 				<Component {...pageProps} />
 			</ThemeProvider>

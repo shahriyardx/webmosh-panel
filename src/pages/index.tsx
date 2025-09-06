@@ -1,10 +1,7 @@
-import React, { useState } from "react"
-import GoogleIcon from "@/components/icons/Google"
+import React from "react"
 import { Button } from "@/components/ui/button"
-import { signIn } from "next-auth/react"
-import { Loader2 } from "lucide-react"
 import type { GetServerSideProps } from "next"
-import { auth, currentUser, getAuth } from "@clerk/nextjs/server"
+import { getAuth } from "@clerk/nextjs/server"
 import { SignInButton } from "@clerk/nextjs"
 
 const Homepage = () => {
@@ -30,7 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const session = getAuth(ctx.req)
 	console.log(session)
 	if (session.userId) {
-		// Redirect if not signed in
 		return {
 			redirect: {
 				destination: "/dashboard",
