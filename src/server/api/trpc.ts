@@ -3,14 +3,24 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next"
 import superjson from "superjson"
 import { ZodError } from "zod"
 import { db } from "@/server/db"
-import { auth } from "@clerk/nextjs/server"
+import { getAuth } from "@clerk/nextjs/server"
 
-type ClerkSession = {
-	userId: string
-}
+type ClerkSession =
+	| {
+			userId: string
+			sessionId: string
+			sessionStatus: string
+			isAuthenticated: true
+	  }
+	| {
+			userId: null
+			sessionId: null
+			sessionStatus: null
+			isAuthenticated: false
+	  }
 
 interface CreateContextOptions {
-	session: ClerkSession | null // What should be the type
+	session: ClerkSession
 }
 
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
@@ -21,10 +31,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 }
 
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-	const { req, res } = opts
-
-	// Get the session from the server using the getServerSession wrapper function
-	const session = (await auth()) as ClerkSession
+	const session = getAuth(opts.req) as ClerkSession
 
 	return createInnerTRPCContext({
 		session: session,
@@ -69,7 +76,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware)
 export const protectedProcedure = t.procedure
 	.use(timingMiddleware)
 	.use(({ ctx, next }) => {
-		if (!ctx.session) {
+		if (!ctx.session.isAuthenticated) {
 			throw new TRPCError({ code: "UNAUTHORIZED" })
 		}
 

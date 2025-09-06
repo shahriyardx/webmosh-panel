@@ -6,7 +6,7 @@ import {
 	publicProcedure,
 } from "@/server/api/trpc"
 
-export const postRouter = createTRPCRouter({
+export const companyRouter = createTRPCRouter({
 	all: protectedProcedure.query(async ({ ctx }) => {
 		return await ctx.db.company.findMany()
 	}),
