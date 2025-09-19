@@ -23,7 +23,17 @@ const SocialLogin = () => {
 				<span>Google</span>
 			</Button>
 
-			<Button className="flex-1">
+			<Button
+				type="button"
+				onClick={() => {
+					signIn?.authenticateWithRedirect({
+						strategy: "oauth_discord",
+						redirectUrl: `${window.location.origin}/auth/`,
+						redirectUrlComplete: `${window.location.origin}/dashboard/`,
+					})
+				}}
+				className="flex-1"
+			>
 				<FaDiscord />
 				<span>Discord</span>
 			</Button>
