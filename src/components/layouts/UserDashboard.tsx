@@ -11,7 +11,7 @@ import {
 	BreadcrumbSeparator,
 } from "../ui/breadcrumb"
 import Link from "next/link"
-import RequireAuth from "../auth/RequireAuth"
+import RequireAuth from "../auth/require-auth"
 
 type Props = {
 	children: ReactNode

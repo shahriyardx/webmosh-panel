@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 	return {
 		redirect: {
-			destination: "/auth",
+			destination: "/auth/sign-in",
 			permanent: false,
 		},
 	}

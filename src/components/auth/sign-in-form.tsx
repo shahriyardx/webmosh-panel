@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useClerk, useSignIn } from "@clerk/nextjs"
-import { getDayTime } from "@/utils/date-time"
 import { useForm } from "react-hook-form"
 import {
 	Form,
@@ -19,7 +18,7 @@ import { useRouter } from "next/router"
 import { Loader2 } from "lucide-react"
 import type { ClerkAPIError } from "@clerk/types"
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors"
-import { FaGoogle } from "react-icons/fa"
+
 import SocialLogin from "./social-login"
 
 export const signUpSchema = z.object({
