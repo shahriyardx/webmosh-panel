@@ -29,8 +29,12 @@ const AuthLayout = ({ children, formName }: Props) => {
 	return (
 		<CoreAuthLayout>
 			<h3 className="text-4xl font-bold">Good {dayTime}!</h3>
-			<p className="mt-2">Welcome back. Sign in to Webmosh.</p>
-			<div className="mt-10 grid grid-cols-2 gap-5">{children}</div>
+			<p className="mt-2 text-muted-foreground">
+				Welcome back. Sign in to Webmosh.
+			</p>
+			<div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+				{children}
+			</div>
 			<div className="mt-5">
 				<p>
 					{formName === "signIn" ? "Don't" : "Already"} have an account?{" "}

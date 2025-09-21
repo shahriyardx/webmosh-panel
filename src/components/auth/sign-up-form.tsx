@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
-import type { GetServerSideProps } from "next"
-import { getAuth } from "@clerk/nextjs/server"
-import { ClerkDegraded, useClerk, useSignIn, useSignUp } from "@clerk/nextjs"
-import Logo from "@/components/shared/Logo"
+import { useClerk, useSignIn, useSignUp } from "@clerk/nextjs"
 import { getDayTime } from "@/utils/date-time"
 import { useForm } from "react-hook-form"
 import {
@@ -19,19 +16,15 @@ import { Input } from "@/components/ui/input"
 import z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Separator } from "@/components/ui/separator"
-import GoogleIcon from "@/components/icons/Google"
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { useRouter } from "next/router"
-import { FacebookIcon, Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import type { ClerkAPIError } from "@clerk/types"
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors"
-import type { ClerkAPIResponseError } from "@clerk/shared/error"
-import Link from "next/link"
-import { FaGoogle, FaDiscord } from "react-icons/fa"
 import SocialLogin from "./social-login"
 
 export const signUpSchema = z.object({
@@ -58,8 +51,6 @@ type SignUpType = z.infer<typeof signUpSchema>
 const SignUpForm = () => {
 	const clerk = useClerk()
 	const router = useRouter()
-	const dayTime = getDayTime()
-	const { signIn, isLoaded } = useSignIn()
 	const { signUp, isLoaded: isSignUpLoaded, setActive } = useSignUp()
 
 	const [loading, setLoading] = useState(false)
@@ -69,12 +60,6 @@ const SignUpForm = () => {
 
 	const form = useForm({
 		resolver: zodResolver(signUpSchema),
-		defaultValues: {
-			firstName: "Shahriyar",
-			lastName: "Alam",
-			email: "mdshahriyaralam552@gmail.com",
-			password: "mdshahriyaralam552@gmail.com",
-		},
 	})
 
 	const verifyForm = useForm({

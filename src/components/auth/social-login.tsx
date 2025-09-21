@@ -7,7 +7,7 @@ const SocialLogin = () => {
 	const { signIn } = useSignIn()
 
 	return (
-		<div className="flex items-center gap-5">
+		<div className="flex flex-wrap items-center gap-5">
 			<Button
 				type="button"
 				onClick={() =>
@@ -19,8 +19,12 @@ const SocialLogin = () => {
 				}
 				className="flex-1"
 			>
-				<FaGoogle />
-				<span>Google</span>
+				<img
+					className="w-5 h-5"
+					src="https://img.icons8.com/color/48/google-logo.png"
+					alt="google-logo"
+				/>
+				<span>Login with Google</span>
 			</Button>
 
 			<Button
@@ -34,8 +38,12 @@ const SocialLogin = () => {
 				}}
 				className="flex-1"
 			>
-				<FaDiscord />
-				<span>Discord</span>
+				<img
+					className="w-5 h-5"
+					src="https://img.icons8.com/color/48/discord-logo.png"
+					alt="discord-logo"
+				/>
+				<span>Login with Discord</span>
 			</Button>
 		</div>
 	)

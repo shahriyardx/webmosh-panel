@@ -45,10 +45,6 @@ const SignInForm = () => {
 
 	const form = useForm({
 		resolver: zodResolver(signUpSchema),
-		defaultValues: {
-			email: "mdshahriyaralam552@gmail.com",
-			password: "mdshahriyaralam552@gmail.com",
-		},
 	})
 
 	const handleSignUp = async (values: SignUpType) => {
